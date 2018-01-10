@@ -1,0 +1,216 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace PGCafe.Object {
+
+<#
+
+List<string> numCountString = new List<string>() { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+                                                   "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen" };
+
+List<string> numthString = new List<string>() { "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth",
+                                                "Ninth", "Tenth", "Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth" };
+
+for ( int typeCount = 2 ; typeCount < 9 ; typeCount++ ){
+    var TypeStringList = Enumerable.Range( 1, typeCount ).Select( item => "T" + item ).ToList();
+    var TypeStringComma = string.Join( ",", TypeStringList );
+    
+    var ItemStringList = Enumerable.Range( 1, typeCount ).Select( item => "item" + item ).ToList();
+    var ItemStringComma = string.Join( ", ", ItemStringList );
+        
+    var TypeItemStringList = Enumerable.Range( 1, typeCount ).Select( item => string.Format( "T{0} item{0}", item ) ).ToList();
+    var TypeItemStringComma = string.Join( ", ", TypeItemStringList );
+
+     #>
+    /// <summary>
+    /// List with <#= numCountString[typeCount] #> item. ( just inherit from List&lt;TupleS&lt;<#= TypeStringComma #>&gt;&gt; and provide some method to use. )
+    /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+    /// <typeparam name="<#= TypeStringList[i] #>"> type of <#= numthString[i] #> item. </typeparam>
+<# } // for #>
+    public class ListS<<#= TypeStringComma #>> : List<TupleS<<#= TypeStringComma #>>> {
+    
+        /// <summary>
+        /// Initializes a new instance of the List&lt;<#= TypeStringComma #>&gt; class that is empty and has the default initial capacity.
+        /// </summary>
+        public ListS() : base() { }
+
+        /// <summary>
+        /// Initializes a new instance of the List&lt;<#= TypeStringComma #>&gt; class that is empty and has the specified initial capacity.
+        /// </summary>
+        /// <param name="capacity"> The number of elements that new new list can initially store. </param>
+        public ListS( int capacity ) : base( capacity ) { }
+
+        /// <summary>
+        /// Initializes a new instance of the List&lt;<#= TypeStringComma #>&gt; class that contains elements copied from the specified collection and has sufficient capacity to accommodate the number of elements copied.
+        /// </summary>
+        /// <param name="collection"> The collection whose elements are copied to the new list. </param>
+        public ListS( IEnumerable<TupleS<<#= TypeStringComma #>>> collection ) : base( collection ) { }
+
+        /// <summary>
+        /// Add item to list.
+        /// ( just call base.Add( TupleS.Create( <#= ItemStringComma #> ) ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to add. </param>
+<# } // for #>
+        public void Add( <#= TypeItemStringComma #> ){
+            base.Add( TupleS.Create( <#= ItemStringComma #> ) );
+        } // public void Add( <#= TypeItemStringComma #> )
+
+        /// <summary>
+        /// find item's index with binary search.
+        /// ( just call base.BinarySearch( TupleS.Create( <#= ItemStringComma #> ) ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to find. </param>
+<# } // for #>
+        /// <returns> index of item. </returns>
+        public int BinarySearch( <#= TypeItemStringComma #> ){
+            return base.BinarySearch( TupleS.Create( <#= ItemStringComma #> ) );
+        } // public void BinarySearch( <#= TypeItemStringComma #> )
+
+        /// <summary>
+        /// find is list has item.
+        /// ( just call base.Contains( TupleS.Create( <#= ItemStringComma #> ) ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to find. </param>
+<# } // for #>
+        /// <returns> list has contains item or not. </returns>
+        public bool Contains( <#= TypeItemStringComma #> ){
+            return base.Contains( TupleS.Create( <#= ItemStringComma #> ) );
+        } // public void Contains( <#= TypeItemStringComma #> )
+
+        /// <summary>
+        /// find item's index in list.
+        /// ( just call base.IndexOf( TupleS.Create( <#= ItemStringComma #> ) ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to find. </param>
+<# } // for #>
+        /// <returns> index of item. </returns>
+        public int IndexOf( <#= TypeItemStringComma #> ){
+            return base.IndexOf( TupleS.Create( <#= ItemStringComma #> ) );
+        } // public void IndexOf( <#= TypeItemStringComma #> )
+
+        /// <summary>
+        /// find item's index in list start with specific index.
+        /// ( just call base.IndexOf( TupleS.Create( <#= ItemStringComma #> ), index ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to find. </param>
+<# } // for #>
+        /// <param name="index"> find item start with index. </param>
+        /// <returns> index of item. </returns>
+        public int IndexOf( <#= TypeItemStringComma #>, int index ){
+            return base.IndexOf( TupleS.Create( <#= ItemStringComma #> ), index );
+        } // public void IndexOf( <#= TypeItemStringComma #>, int index )
+
+        /// <summary>
+        /// find item's index in list start with specific index and specific item num.
+        /// ( just call base.IndexOf( TupleS.Create( <#= ItemStringComma #> ), index, count ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to find. </param>
+<# } // for #>
+        /// <param name="index"> find item start with index. </param>
+        /// <param name="count"> find only count num of item. </param>
+        /// <returns> index of item. </returns>
+        public int IndexOf( <#= TypeItemStringComma #>, int index, int count ){
+            return base.IndexOf( TupleS.Create( <#= ItemStringComma #> ), index, count );
+        } // public void IndexOf( <#= TypeItemStringComma #>, int index, int count )
+
+        /// <summary>
+        /// insert item to list at index.
+        /// ( just call base.Insert( index, TupleS.Create( <#= ItemStringComma #> ) ) )
+        /// </summary>
+        /// <param name="index"> insert at index. </param>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to insert. </param>
+<# } // for #>
+        public void Insert( int index, <#= TypeItemStringComma #> ){
+            base.Insert( index, TupleS.Create( <#= ItemStringComma #> ) );
+        } // public void Insert( int index, <#= TypeItemStringComma #> )
+
+        /// <summary>
+        /// find item's index in list from last.
+        /// ( just call base.LastIndexOf( TupleS.Create( <#= ItemStringComma #> ) ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to insert. </param>
+<# } // for #>
+        /// <returns> index of item. </returns>
+        public int LastIndexOf( <#= TypeItemStringComma #> ){
+            return base.LastIndexOf( TupleS.Create( <#= ItemStringComma #> ) );
+        } // public void LastIndexOf( <#= TypeItemStringComma #> )
+
+        /// <summary>
+        /// find item's index in list from last start with specific index.
+        /// ( just call base.LastIndexOf( TupleS.Create( <#= ItemStringComma #> ), index ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to insert. </param>
+<# } // for #>
+        /// <param name="index"> find item start with index. </param>
+        /// <returns> index of item. </returns>
+        public int LastIndexOf( <#= TypeItemStringComma #>, int index ){
+            return base.LastIndexOf( TupleS.Create( <#= ItemStringComma #> ), index );
+        } // public void LastIndexOf( <#= TypeItemStringComma #>, int index )
+
+        /// <summary>
+        /// find item's index in list from last start with specific index and specific item num.
+        /// ( just call base.LastIndexOf( TupleS.Create( <#= ItemStringComma #> ), index, count ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to insert. </param>
+<# } // for #>
+        /// <param name="index"> find item start with index. </param>
+        /// <param name="count"> find only count num of item. </param>
+        /// <returns> index of item. </returns>
+        public int LastIndexOf( <#= TypeItemStringComma #>, int index, int count ){
+            return base.LastIndexOf( TupleS.Create( <#= ItemStringComma #> ), index, count );
+        } // public void LastIndexOf( <#= TypeItemStringComma #>, int index, int count )
+
+        /// <summary>
+        /// remove first match item from list.
+        /// ( just call base.Remove( TupleS.Create( <#= ItemStringComma #> ) ) )
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item of item to remove. </param>
+<# } // for #>
+        /// <returns> has remove success or not. </returns>
+        public bool Remove( <#= TypeItemStringComma #> ){
+            return base.Remove( TupleS.Create( <#= ItemStringComma #> ) );
+        } // public void Remove( <#= TypeItemStringComma #> )
+
+        
+        
+        #region GetItemList        
+
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <summary>
+        /// Get list of all item's <#= numthString[i] #> item.
+        /// </summary>
+        /// <returns></returns>
+        public List<<#= TypeStringList[i] #>> Item<#= i + 1 #>List() {
+            return this.Select( item => item.Item<#= i + 1 #> ).ToList();
+        } // public List<<#= TypeStringList[i] #>> Item<#= i + 1 #>List()
+<# } #>
+
+        #endregion
+
+    } // public class ListS<<#= TypeStringComma #>> : List<TupleS<<#= TypeStringComma #>>>
+    
+
+<# } #>
+
+
+} // namespace PGCafe.Object

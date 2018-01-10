@@ -1,0 +1,70 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Threading;
+
+namespace PGCafe {
+
+<#
+
+List<string> numCountString = new List<string>() { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+                                                   "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen" };
+
+List<string> numthString = new List<string>() { "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth",
+                                                "Ninth", "Tenth", "Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth" };
+
+#>
+    /// <summary> Thread static extension method. </summary>
+    public static class PGThread {    
+
+        /// <summary>
+        /// Start a thread with no argument action.
+        /// return a thread that has been start to run.
+        /// </summary>
+        /// <param name="RunAction"> the action to run with thread. </param>
+        /// <returns> running thread </returns>
+        public static Thread StartNewThread( Action RunAction ) {
+            Thread newThread = new Thread( new ThreadStart( RunAction ) );
+            newThread.Start();
+            return newThread;
+        } // public static Thread StartNewThread( Action RunAction )
+
+<#
+for ( int typeCount = 1 ; typeCount < 17 ; typeCount++ ){
+    var TypeStringList = Enumerable.Range( 1, typeCount ).Select( item => "T" + item ).ToList();
+    var TypeStringComma = string.Join( ",", TypeStringList );
+    
+    var ItemStringList = Enumerable.Range( 1, typeCount ).Select( item => "argument" + item ).ToList();
+    var ItemStringComma = string.Join( ", ", ItemStringList );
+        
+    var TypeItemStringList = Enumerable.Range( 1, typeCount ).Select( item => string.Format( "T{0} argument{0}", item ) ).ToList();
+    var TypeItemStringComma = string.Join( ", ", TypeItemStringList );
+    
+     #>
+        /// <summary>
+        /// Start a thread with <#= typeCount #> arguments action.
+        /// return a thread that has been start to run.
+        /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <typeparam name="<#= TypeStringList[i] #>"> type of <#= numthString[i] #> argument. </typeparam>
+<# } // for #>
+        /// <param name="RunAction"> the action to run with thread. </param>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> argument </param>
+<# } // for #>
+        /// <returns> running thread </returns>
+        public static Thread StartNewThread<<#= TypeStringComma #>>( Action<<#= TypeStringComma #>> RunAction, <#= TypeItemStringComma #> ) {
+            Thread newThread = new Thread( new ThreadStart( () => RunAction( <#= ItemStringComma #> ) ) );
+            newThread.Start();
+            return newThread;
+        } // public static Thread StartNewThread<<#= TypeStringComma #>>( Action<<#= TypeStringComma #>> RunAction, <#= TypeItemStringComma #> )
+
+<# } // for #>
+     } // public static class PGThread
+
+
+} // namespace PGCafe

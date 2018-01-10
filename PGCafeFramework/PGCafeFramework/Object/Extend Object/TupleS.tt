@@ -1,0 +1,95 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace PGCafe.Object {
+
+<#
+
+List<string> numCountString = new List<string>() { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+                                                   "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen" };
+
+List<string> numthString = new List<string>() { "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth",
+                                                "Ninth", "Tenth", "Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth" };
+
+#>
+    /// <summary> TupleS static function </summary> 
+    public static class TupleS {
+
+<#
+for ( int typeCount = 2 ; typeCount < 9 ; typeCount++ ){
+    var TypeStringList = Enumerable.Range( 1, typeCount ).Select( item => "T" + item ).ToList();
+    var TypeStringComma = string.Join( ",", TypeStringList );
+    
+    var ItemStringList = Enumerable.Range( 1, typeCount ).Select( item => "Item" + item ).ToList();
+    var ItemStringComma = string.Join( ", ", ItemStringList );
+        
+    var TypeItemStringList = Enumerable.Range( 1, typeCount ).Select( item => string.Format( "T{0} Item{0}", item ) ).ToList();
+    var TypeItemStringComma = string.Join( ", ", TypeItemStringList );
+    
+     #>
+        /// <summary> Create TupleS with specify item. </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <typeparam name="<#= TypeStringList[i] #>"> type of <#= numthString[i] #> item. </typeparam>
+<# } // for #>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item </param>
+<# } // for #>
+        public static TupleS<<#= TypeStringComma #>> Create<<#= TypeStringComma #>>( <#= TypeItemStringComma #> ) {
+            return new TupleS<<#= TypeStringComma #>>( <#= ItemStringComma #> );
+        } // public static TupleS<<#= TypeStringComma #>> Create<<#= TypeStringComma #>>( <#= TypeItemStringComma #> )
+
+<# } #>
+     } // public static class TupleS
+
+<#
+
+for ( int typeCount = 2 ; typeCount < 9 ; typeCount++ ){
+    var TypeStringList = Enumerable.Range( 1, typeCount ).Select( item => "T" + item ).ToList();
+    var TypeStringComma = string.Join( ",", TypeStringList );
+    
+    var ItemStringList = Enumerable.Range( 1, typeCount ).Select( item => "Item" + item ).ToList();
+    var ItemStringComma = string.Join( ", ", ItemStringList );
+        
+    var TypeItemStringList = Enumerable.Range( 1, typeCount ).Select( item => string.Format( "T{0} Item{0}", item ) ).ToList();
+    var TypeItemStringComma = string.Join( ", ", TypeItemStringList );
+
+     #>
+    /// <summary>
+    /// Tuple with <#= numCountString[typeCount] #> item ( struct Type, and item is writeable
+    /// </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+    /// <typeparam name="<#= TypeStringList[i] #>"> type of <#= numthString[i] #> item. </typeparam>
+<# } // for #>
+    public struct TupleS<<#= TypeStringComma #>> {
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        private readonly <#= TypeStringList[i] #> m<#= ItemStringList[i] #>;
+<# } // for #>
+
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <summary> <#= ItemStringList[i] #> </summary>
+        public <#= TypeItemStringList[i] #> { get { return this.m<#= ItemStringList[i] #>; } }
+<# } // for #>
+
+        /// <summary> Create Struct Tuple by <#= numCountString[typeCount] #> Item. </summary>
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+        /// <param name="<#= ItemStringList[i] #>"> <#= numthString[i] #> item </param>
+<# } // for #>
+        public TupleS( <#= TypeItemStringComma #> ){
+<# for ( int i = 0 ; i < TypeStringList.Count ; i++ ){ #>
+            this.m<#= ItemStringList[i] #> = <#= ItemStringList[i] #>;
+<# } // for #>
+        } // public TupleS( <#= TypeItemStringComma #> )
+    } // public struct TupleS<T1,T2>
+
+
+<# } #>
+
+
+} // namespace PGCafe.Object

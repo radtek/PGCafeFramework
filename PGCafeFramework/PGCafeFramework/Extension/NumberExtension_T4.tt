@@ -1,0 +1,135 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ output extension=".cs" #>
+
+using System;
+
+namespace PGCafe {
+    /// <summary>
+    /// Number's Extension.
+    /// </summary>
+    public static class NumberExtension_T4 {
+
+<#
+    List<Type> mAllNumberType = new List<Type>() {
+         typeof( byte ), typeof( ushort ), typeof( uint ), typeof( ulong ), typeof( sbyte ),
+         typeof( short ), typeof( int ), typeof( long ), typeof( float ), typeof( double ), typeof( decimal ) };
+    List<string> mAllNumberTypeName = mAllNumberType.Select( item => item.Name ).ToList();
+
+    List<Type> mFloatNumberType = new List<Type>() { typeof( float ), typeof( double ), typeof( decimal ) };
+    List<string> mFloatNumberTypeName = mFloatNumberType.Select( item => item.Name ).ToList();
+
+    List<Type> mSignedNumberType = new List<Type>() { 
+         typeof( sbyte ), typeof( short ), typeof( int ), typeof( long ), typeof( float ), typeof( double ), typeof( decimal ) };
+    List<string> mSignedNumberTypeName = mSignedNumberType.Select( item => item.Name ).ToList();
+#>
+
+    #region Mirror
+
+<#
+    foreach ( var typeName in mAllNumberTypeName ){
+#>
+        /// <summary> Return new value that mirror by center value. </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="Center">The Center value to calculate mirror value.</param>
+        /// <returns>new value that mirror by center value</returns>
+        public static <#= typeName #> Mirror( this <#= typeName #> source, <#= typeName #> Center ){
+<# // only specify type need cast.
+     if ( new string[]{ typeof( Byte ).Name, typeof( UInt16 ).Name, typeof( SByte ).Name, typeof( Int16 ).Name }.Contains( typeName ) ){ #>
+            return (<#= typeName #>)( Center + ( Center - source ) );
+<# } else { #>
+            return ( Center + ( Center - source ) );
+<# } #>
+        } // public static <#= typeName #> Mirror( this <#= typeName #> source, <#= typeName #> Center )
+
+<#
+    } // foreach
+#>
+    #endregion
+        
+
+    #region Abs
+
+<#
+    foreach ( var typeName in mSignedNumberTypeName ){
+#>
+        /// <summary> Return absolute value of source. </summary>
+        /// <param name="source">The source.</param>
+        /// <returns>absolute value of source</returns>
+        public static <#= typeName #> Abs( this <#= typeName #> source ){
+            return Math.Abs( source );
+        } // public static <#= typeName #> Abs( this <#= typeName #> source )
+<#
+    } // foreach
+#>
+    #endregion
+
+    #region Floor, Round, Ceiling
+<#
+    foreach ( var typeName in mFloatNumberTypeName ){
+#>
+
+        /// <summary> Return max integer that smaller than or equal the source. </summary>
+        /// <param name="source">The source.</param>
+        /// <returns>max integer that smaller than or equal the source/</returns>
+        public static <#= typeName #> Floor( this <#= typeName #> source ){
+<# if ( typeName == typeof ( float ).Name ){ // only float need cast. #>
+            return (<#= typeName #>)Math.Floor( source );
+<# } else { #>
+            return Math.Floor( source );
+<# } #>
+        } // public static <#= typeName #> Floor( this <#= typeName #> source )
+
+        /// <summary> Return min integer that bigger than or equal the source. </summary>
+        /// <param name="source">The source.</param>
+        /// <returns>max min integer that bigger than or equal the source/</returns>
+        public static <#= typeName #> Ceiling( this <#= typeName #> source ){
+            return (<#= typeName #>)Math.Ceiling( source );
+        } // public static <#= typeName #> Ceiling( this <#= typeName #> source )
+
+        /// <summary> Rounds a value to the nearest integral value. </summary>
+        /// <param name="source">The source.</param>
+        /// <returns>Nearest integral value</returns>
+        public static <#= typeName #> Round( this <#= typeName #> source ){
+            return (<#= typeName #>)Math.Round( source );
+        } // public static <#= typeName #> Round( this <#= typeName #> source )
+
+        /// <summary> Rounds a value to a specified number of fractional digits. </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="decimals">The number of decimal places in the return value.</param>
+        /// <returns>Specified number of fractional digits</returns>
+        public static <#= typeName #> Round( this <#= typeName #> source, int decimals ){
+            return (<#= typeName #>)Math.Round( source, decimals );
+        } // public static <#= typeName #> Round( this <#= typeName #> source, int decimals )
+
+        /// <summary> Rounds a value to a specified number of fractional digits. A parameter specifies how to round the value if it is midway between two numbers. </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="decimals">The number of decimal places in the return value.</param>
+        /// <param name="mode">Specification for how to round d if it is midway between two other numbers.</param>
+        /// <returns>Specified number of fractional digits</returns>
+        public static <#= typeName #> Round( this <#= typeName #> source, int decimals, MidpointRounding mode ){
+            return (<#= typeName #>)Math.Round( source, decimals, mode );
+        } // public static <#= typeName #> Round( this <#= typeName #> source, int decimals, MidpointRounding mode )
+
+        /// <summary> Rounds a  value to the nearest integer. A parameter specifies how to round the value if it is midway between two numbers. </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="mode">Specification for how to round d if it is midway between two other numbers.</param>
+        /// <returns>Specified number of fractional digits</returns>
+        public static <#= typeName #> Round( this <#= typeName #> source, MidpointRounding mode ){
+            return (<#= typeName #>)Math.Round( source, mode );
+        } // public static <#= typeName #> Round( this <#= typeName #> source, MidpointRounding mode )
+
+
+<#
+    } // foreach
+#>
+    #endregion
+
+
+    } // public static class NumberExtension_T4
+
+} // namespace PGCafe
