@@ -46,7 +46,7 @@ namespace PGCafe {
                 // get copy property method.
                 var copyFrom = typeof( ConvertExtension )
                     .GetMethod( nameof( ConvertExtension.CopyFrom ) ).MakeGenericMethod( TType, TType );
-                copyFrom.Invoke( null, new object[] { result, source, true, false, null, ExceptNameList, BindingFlags.Public | BindingFlags.Instance } );
+                copyFrom.Invoke( null, new object[] { result, source, true, false, false, null, ExceptNameList, BindingFlags.Public | BindingFlags.Instance } );
 
                 // set new location.
                 result.Location = source.Location;
@@ -73,7 +73,7 @@ namespace PGCafe {
 
 
                 return result;
-            } catch {
+            } catch ( Exception ex ) {
                 return null;
             } // try-catch
         } // public static Control Clone( this Control source, bool CopyParent = true, ... )

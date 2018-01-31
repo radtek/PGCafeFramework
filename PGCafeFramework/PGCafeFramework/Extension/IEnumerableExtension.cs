@@ -122,7 +122,7 @@ namespace PGCafe {
         /// <param name="count"> number of item to take. </param>
         public static IEnumerable<T> TakeLast<T>( this IEnumerable<T> source, int count ) {
             var all = source.ToArray();
-            for ( int i = all.Length - count ; i < all.Length ; i++ )
+            for ( int i = Math.Max( 0, all.Length - count ) ; i < all.Length ; i++ )
                 yield return all[i];
         } // public static IEnumerable<T> TakeLast<T>( this IEnumerable<T> source, int count )
         

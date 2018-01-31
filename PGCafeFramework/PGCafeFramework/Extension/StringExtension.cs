@@ -639,6 +639,92 @@ namespace PGCafe {
 
         #endregion
 
+        #region Prefix, Suffix, Fix
+
+        /// <summary> Add prefix if the source is not null or empty, otherwise just return source. </summary>
+        /// <param name="source">source.</param>
+        /// <param name="prefix">Prefix string to add.</param>
+        /// <returns> return source with prefix if source is not null or empty, otherwise return source. </returns>
+        public static string PrefixIfNotNullOrEmpty( this string source, string prefix ){
+            if ( source.IsNullOrEmpty() )
+                return source;
+            else return prefix + source;
+        } // public static string PrefixIfNotNullOrEmpty( this string source, string prefix )
+        
+        /// <summary> Add prefix if the source is not null or white space, otherwise just return source. </summary>
+        /// <param name="source">source.</param>
+        /// <param name="prefix">Prefix string to add.</param>
+        /// <returns> return source with prefix if source is not null or white space, otherwise return source. </returns>
+        public static string PrefixIfNotNullOrWhiteSpace( this string source, string prefix ){
+            if ( source.IsNullOrWhiteSpace() )
+                return source;
+            else return prefix + source;
+        } // public static string PrefixIfNotNullOrWhiteSpace( this string source, string prefix )
+        
+        /// <summary> Add suffix if the source is not null or empty, otherwise just return source. </summary>
+        /// <param name="source">source.</param>
+        /// <param name="suffix">Suffix string to add.</param>
+        /// <returns> return source with suffix if source is not null or empty, otherwise return source. </returns>
+        public static string SuffixIfNotNullOrEmpty( this string source, string suffix ){
+            if ( source.IsNullOrEmpty() )
+                return source;
+            else return source + suffix;
+        } // public static string SuffixIfNotNullOrEmpty( this string source, string suffix )
+        
+        /// <summary> Add suffix if the source is not null or white space, otherwise just return source. </summary>
+        /// <param name="source">source.</param>
+        /// <param name="suffix">Suffix string to add.</param>
+        /// <returns> return source with suffix if source is not null or white space, otherwise return source. </returns>
+        public static string SuffixIfNotNullOrWhiteSpace( this string source, string suffix ){
+            if ( source.IsNullOrWhiteSpace() )
+                return source;
+            else return source + suffix;
+        } // public static string SuffixIfNotNullOrWhiteSpace( this string source, string suffix )
+        
+        /// <summary> Add prefix and suffix if the source is not null or empty, otherwise just return source. </summary>
+        /// <param name="source">source.</param>
+        /// <param name="prefix">Prefix string to add.</param>
+        /// <param name="suffix">Suffix string to add.</param>
+        /// <returns> return source with prefix and suffix if source is not null or empty, otherwise return source. </returns>
+        public static string FixIfNotNullOrEmpty( this string source, string prefix, string suffix ){
+            if ( source.IsNullOrEmpty() )
+                return source;
+            else return prefix + source + suffix;
+        } // public static string FixIfNotNullOrEmpty( this string source, string prefix, string suffix )
+        
+        /// <summary> Add prefix and suffix if the source is not null or white space, otherwise just return source. </summary>
+        /// <param name="source">source.</param>
+        /// <param name="prefix">Prefix string to add.</param>
+        /// <param name="suffix">Suffix string to add.</param>
+        /// <returns> return source with prefix and suffix if source is not null or white space, otherwise return source. </returns>
+        public static string FixIfNotNullOrWhiteSpace( this string source, string prefix, string suffix ){
+            if ( source.IsNullOrWhiteSpace() )
+                return source;
+            else return prefix + source + suffix;
+        } // public static string FixIfNotNullOrWhiteSpace( this string source, string prefix, string suffix )
+
+        /// <summary> Use default value replace source is null or empty, otherwise just return source. </summary>
+        /// <param name="source">source.</param>
+        /// <param name="defaultValue">The default value to use when source is null or empty.</param>
+        /// <returns> return default value if source is null or empty, otherwise just return source </returns>
+        public static string DefaultIfNullOrEmpty( this string source, string defaultValue ){
+            if ( !source.IsNullOrEmpty() )
+                return source;
+            else return defaultValue;
+        } // public static string DefaultIfNullOrEmpty( this string source, string defaultValue )
+        
+        /// <summary> Use default value replace source is null or white space, otherwise just return source. </summary>
+        /// <param name="source">source.</param>
+        /// <param name="defaultValue">The default value to use when source is null or white space.</param>
+        /// <returns> return default value if source is null or white space, otherwise just return source </returns>
+        public static string DefaultIfNullOrWhiteSpace( this string source, string defaultValue ){
+            if ( !source.IsNullOrWhiteSpace() )
+                return source;
+            else return defaultValue;
+        } // public static string DefaultIfNullOrWhiteSpace( this string source, string defaultValue )
+
+        #endregion
+
     } // public static class StringExtension
 
 

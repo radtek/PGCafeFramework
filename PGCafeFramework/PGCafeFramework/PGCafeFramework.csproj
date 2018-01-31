@@ -63,7 +63,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release net40|AnyCPU'">
     <OutputPath>..\PGRelease\PGCafeFramework\net40\</OutputPath>
     <DefineConstants>TRACE;NET40;NET35;NET30;NET20;</DefineConstants>
-    <DocumentationFile>..\PGRelease\PGCafeFramework\net45\PGCafeFramework.XML</DocumentationFile>
+    <DocumentationFile>..\PGRelease\PGCafeFramework\net40\PGCafeFramework.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
