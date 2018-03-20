@@ -283,13 +283,19 @@ namespace PGCafe {
 
             // convert and set value.
             var args = new object[] { source, null, throwExceptionIfCannotConvert };
-            var success = (bool)convertor.Invoke( null, args );
+            try {
+                var success = (bool)convertor.Invoke( null, args );
             
-            // if success, set result to result object.
-            if ( success ) result = args[1];
+                // if success, set result to result object.
+                if ( success ) result = args[1];
 
-            // return success or not.
-            return success;
+                // return success or not.
+                return success;
+            } catch ( System.Reflection.TargetInvocationException ex ){
+                // iterator TargetInvocationException exception of dynamic invoke method.
+                var actualException = ex.InnerException;
+                throw actualException;
+            } // try-catch
         } // private static bool TryToType( this object source, Type Type, ref object result, bool throwExceptionIfCannotConvert )
         
 

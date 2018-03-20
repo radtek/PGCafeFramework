@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -109,6 +110,7 @@ namespace PGCafe.Object {
         /// <summary> Initializes a new instance of the <see cref="PGAlignment"/> class. </summary>
         /// <param name="Vertical">The vertical alignment value.</param>
         /// <param name="Horizontal">The horizontal alignment value.</param>
+        [JsonConstructor]
         public PGAlignment( double Vertical, double Horizontal ) {
             this.Horizontal = Horizontal;  this.Vertical = Vertical;
         } // public PGAlignment( double Vertical, double Horizontal )

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Drawing;
 
 namespace PGCafe.Object {
@@ -37,6 +38,7 @@ namespace PGCafe.Object {
         /// <param name="Y2"> Y of Point2 </param>
         /// <param name="Value1"> Value of Point1 </param>
         /// <param name="Value2"> Value of Point2 </param>
+        [JsonConstructor]
         public ValueLine( float X1, float Y1, float X2, float Y2, double Value1, double Value2 ) {
             this.X1 = X1;  this.Y1 = Y1;
             this.X2 = X2;  this.Y2 = Y2;
@@ -264,6 +266,7 @@ namespace PGCafe.Object {
         /// <param name="Width"> Line's width </param>
         /// <param name="LeftValue"> Value of left point </param>
         /// <param name="RightValue"> Value of right point </param>
+        [JsonConstructor]
         public HValueLine( float X, float Y, float Width, double LeftValue, double RightValue ) {
             this.X = X;
             this.Y = Y;
@@ -424,6 +427,7 @@ namespace PGCafe.Object {
         /// <param name="Height"> Line's height </param>
         /// <param name="TopValue"> Value of top point </param>
         /// <param name="BottomValue"> Value of bottom point </param>
+        [JsonConstructor]
         public VValueLine( float X, float Y, float Height, double TopValue, double BottomValue ) {
             this.X = X;
             this.Y = Y;

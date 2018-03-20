@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace PGCafe.Object {
         public TValue Value { get; set; }
         
         /// <summary> Create Key and Value pair </summary>
+        [JsonConstructor]
         public KeyValueS( TKey Key, TValue Value ) {
             this.Key = Key;  this.Value = Value;
         } // public KeyValueS( TKey Key, TValue Value )

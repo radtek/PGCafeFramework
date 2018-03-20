@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,10 +8,15 @@ using System.Text;
 namespace PGCafe.Object {
     /// <summary> Collect multiple exception and throw it at once. </summary>
     public class MultipleException : Exception {
+        [JsonProperty]
         private Exception[] mItems;
 
         /// <summary> Exceptions be collected. </summary>
         public ReadOnlyCollection<Exception> Items { get { return Array.AsReadOnly( mItems ); } }
+
+        /// <summary> Create MultipleException without initial. </summary>
+        public MultipleException(){
+        } // public MultipleException()
 
         /// <summary> Create MultipleException and with base message. </summary>
         /// <param name="message"> error meesage. </param>

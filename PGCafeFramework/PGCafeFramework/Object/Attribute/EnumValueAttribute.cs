@@ -13,17 +13,20 @@ namespace PGCafe.Object {
     /// * get string value of Enum with <see cref="EnumExtension.StringValue"/>
     /// * set Enum value of string with <see cref="EnumExtension.ToEnumByStringValue"/>
     /// </summary>
-    [AttributeUsage( AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false )]
+    [AttributeUsage( AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true )]
     public class EnumStringValueAttribute : Attribute {
 
-        /// <summary> Specific column name, if null, get the field's name to instead it. </summary>
+        /// <summary> Get or Set the key of this string value.( specific the key when use multiple <see cref="EnumStringValueAttribute"/> ) </summary>
+        public string Key { get; set; }
+
+        /// <summary> Specific value to represent this enum field. </summary>
         public string Value { get; set; }
 
-        /// <summary> Set the field to be a DB Column, to use extension in PGLibrary.Database. </summary>
-        /// <param name="Value"> Specify column name, if null, use the field's name to instead it </param>
-        public EnumStringValueAttribute( string Value = null ) {
+        /// <summary> Set the string value to represent this enum field. </summary>
+        /// <param name="Value"> Specific value to represent this enum field. </param>
+        public EnumStringValueAttribute( string Value ) {
             this.Value = Value;
-        } // public EnumStringValueAttribute( string Value = null )
+        } // public EnumStringValueAttribute( string Value )
         
     } // public class EnumStringValueAttribute : Attribute
 

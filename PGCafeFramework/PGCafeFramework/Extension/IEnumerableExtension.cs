@@ -104,7 +104,61 @@ namespace PGCafe {
 
         #endregion
 
+        #region MinOrDefault, MaxOrDefault
 
+        /// <summary> get the minimum value in <see cref="IEnumerable{T}"/>, if no any value in collection, return default value. </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"> source </param>
+        /// <param name="DefaultValue">The default value to return if no any value in collection.</param>
+        public static T MinOrDefault<T>( this IEnumerable<T> source, T DefaultValue = default( T ) ){
+            var sourceArray = source.ToArray();
+            if ( !sourceArray.Any() )
+                return DefaultValue;
+
+            return sourceArray.Min();
+        } // public static T MinOrDefault<T>( this IEnumerable<T> source, T DefaultValue = default( T ) )
+
+        /// <summary> get the minimum value in <see cref="IEnumerable{T}" />, if no any value in collection, return default value. </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="source">source</param>
+        /// <param name="selector">selector to select value from source.</param>
+        /// <param name="DefaultValue">The default value to return if no any value in collection.</param>
+        public static TResult MinOrDefault<TSource,TResult>( this IEnumerable<TSource> source, Func<TSource,TResult> selector, TResult DefaultValue = default( TResult ) ){
+            var sourceArray = source.ToArray();
+            if ( !sourceArray.Any() )
+                return DefaultValue;
+
+            return sourceArray.Min( selector );
+        } // public static TResult MinOrDefault<TSource,TResult>( this IEnumerable<T> source, Func<TSource,TResult> selector, TResult DefaultValue = default( TResult ) )
+        
+        /// <summary> get the maximum value in <see cref="IEnumerable{T}"/>, if no any value in collection, return default value. </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"> source </param>
+        /// <param name="DefaultValue">The default value to return if no any value in collection.</param>
+        public static T MaxOrDefault<T>( this IEnumerable<T> source, T DefaultValue = default( T ) ){
+            var sourceArray = source.ToArray();
+            if ( !sourceArray.Any() )
+                return DefaultValue;
+
+            return sourceArray.Max();
+        } // public static T MinOrDefault<T>( this IEnumerable<T> source, T DefaultValue = default( T ) )
+        
+        /// <summary> get the maximum value in <see cref="IEnumerable{T}"/>, if no any value in collection, return default value. </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="source">source</param>
+        /// <param name="selector">selector to select value from source.</param>
+        /// <param name="DefaultValue">The default value to return if no any value in collection.</param>
+        public static TResult MaxOrDefault<TSource,TResult>( this IEnumerable<TSource> source, Func<TSource,TResult> selector, TResult DefaultValue = default( TResult ) ){
+            var sourceArray = source.ToArray();
+            if ( !sourceArray.Any() )
+                return DefaultValue;
+
+            return sourceArray.Max( selector );
+        } // public static TResult MinOrDefault<TSource,TResult>( this IEnumerable<TSource> source, Func<TSource,TResult> selector, TResult DefaultValue = default( TResult ) )
+
+        #endregion
 
         /// <summary> Skip items of count at last. </summary>
         /// <typeparam name="T"> type of item in source list </typeparam>

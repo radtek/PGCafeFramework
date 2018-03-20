@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using Newtonsoft.Json;
+using System.Drawing;
 
 namespace PGCafe.Object {
     
@@ -43,6 +44,7 @@ namespace PGCafe.Object {
         /// <param name="RightValue">Value of Right.</param>
         /// <param name="TopValue">Value of Top.</param>
         /// <param name="BottomValue">Value of Bottom.</param>
+        [JsonConstructor]
         public ValueRect( float X, float Y, float Width, float Height, double LeftValue, double RightValue, double TopValue, double BottomValue ) {
             this.X = X;  this.Y = Y;  this.Width = Width;  this.Height = Height;
             this.LeftValue = LeftValue;  this.RightValue = RightValue;
@@ -223,6 +225,7 @@ namespace PGCafe.Object {
         /// <param name="Height">Height of Rect.</param>
         /// <param name="LeftValue">Value of Left.</param>
         /// <param name="RightValue">Value of Right.</param>
+        [JsonConstructor]
         public HValueRect( float X, float Y, float Width, float Height, double LeftValue, double RightValue ) {
             this.X = X;  this.Y = Y;  this.Width = Width;  this.Height = Height;
             this.LeftValue = LeftValue;  this.RightValue = RightValue;
@@ -376,6 +379,7 @@ namespace PGCafe.Object {
 
         /// <summary> Value of Bottom </summary>
         public double BottomValue { get; set; }
+        [JsonConstructor]
 
         /// <summary> Initializes a new instance of the <see cref="VValueRect"/> struct. </summary>
         /// <param name="X"> X of TopLeft point </param>

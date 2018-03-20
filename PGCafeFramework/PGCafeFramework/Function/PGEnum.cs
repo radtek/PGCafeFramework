@@ -27,6 +27,21 @@ namespace PGCafe {
                 .Select( item => DisplayValue.Create( item.Description(), item.CastTo<TEnum>() ) )
                 .ToList();                
         } // public static List<DisplayValue<string,TEnum>> GetDisplayValueWithDescription<TEnum>()
+
+        /// <summary> Get the list of KeyValue with Key = Description, Value = Enum's Value </summary>
+        /// <typeparam name="TEnum">type of enum</typeparam>
+        /// <param name="Values">only the value in list will be selected.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">The type of TEnum is not Enum</exception>
+        public static List<DisplayValue<string,TEnum>> GetDisplayValueWithDescription<TEnum>( IEnumerable<TEnum> Values ) {
+            // if not enum type, throw exception.
+            if ( !typeof( TEnum ).IsEnum ) throw new ArgumentException( "The type of TEnum is not Enum" );
+
+            // get enum value and description.
+            return Values.Cast<Enum>()
+                .Select( item => DisplayValue.Create( item.Description(), item.CastTo<TEnum>() ) )
+                .ToList();                
+        } // public static List<DisplayValue<string,TEnum>> GetDisplayValueWithDescription<TEnum>( IEnumerable<TEnum> Values )
         
 
         /// <summary> Get the list of KeyValue with Key = Enum's Name, Value = Enum's Value </summary>
@@ -40,6 +55,19 @@ namespace PGCafe {
                 .Select( item => DisplayValue.Create( item.ToString(), item.CastTo<TEnum>() ) )
                 .ToList();                
         } // public static List<DisplayValue<string,TEnum>> GetDisplayValueWithName<TEnum>()
+        
+
+        /// <summary> Get the list of KeyValue with Key = Enum's Name, Value = Enum's Value </summary>
+        /// <typeparam name="TEnum"> type of enum </typeparam>
+        public static List<DisplayValue<string,TEnum>> GetDisplayValueWithName<TEnum>( IEnumerable<TEnum> Values ) {
+            // if not enum type, throw exception.
+            if ( !typeof( TEnum ).IsEnum ) throw new ArgumentException( "The type of TEnum is not Enum" );
+
+            // get enum value and description.
+            return Values.Cast<Enum>()
+                .Select( item => DisplayValue.Create( item.ToString(), item.CastTo<TEnum>() ) )
+                .ToList();                
+        } // public static List<DisplayValue<string,TEnum>> GetDisplayValueWithName<TEnum>( IEnumerable<TEnum> Values )
 
     } // public static class PGEnum
 

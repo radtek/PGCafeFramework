@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace PGCafe.Object {
     /// <summary> Provide success and exception property for return value. </summary>
@@ -19,6 +20,7 @@ namespace PGCafe.Object {
         /// <summary> Create instance by success and exception. </summary>
         /// <param name="Success"> success or not. </param>
         /// <param name="Exception"> exception which occur. </param>
+        [JsonConstructor]
         public EmptyResult( bool Success, Exception Exception ) {
             this.Success = Success;
             this.Exception = Exception;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,7 @@ namespace PGCafe.Object {
         /// </summary>
         /// <param name="From">The value form.</param>
         /// <param name="To">The value to.</param>
+        [JsonConstructor]
         public ValueRange( double From, double To ) {
             this.mFromValue = From;  this.mToValue = To;
             this.Min = 0;  this.Max = 0;

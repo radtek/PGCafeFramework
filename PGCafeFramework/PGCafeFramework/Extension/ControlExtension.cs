@@ -163,9 +163,9 @@ namespace PGCafe {
         /// <param name="DisplayMember">The display member.</param>
         /// <param name="ValueMember">The value member.</param>
         public static void SetDataSource( this ListControl source, object DataSource, string DisplayMember, string ValueMember ) {
-            source.DataSource = DataSource;
             source.DisplayMember = DisplayMember;
             source.ValueMember = ValueMember;
+            source.DataSource = DataSource;
         } // public static void SetDataSource( this ListControl source, object DataSource, string DisplayMember, string ValueMember )
         
         /// <summary> Clear DataSource, DisplayMember, ValueMember in single line. </summary>
@@ -186,9 +186,9 @@ namespace PGCafe {
         /// <param name="DisplayMember">The display member.</param>
         /// <param name="ValueMember">The value member.</param>
         public static void SetDataSource( this DataGridViewComboBoxColumn source, object DataSource, string DisplayMember, string ValueMember ) {
-            source.DataSource = DataSource;
             source.DisplayMember = DisplayMember;
             source.ValueMember = ValueMember;
+            source.DataSource = DataSource;
         } // public static void SetDataSource( this DataGridViewComboBoxColumn source, object DataSource, string DisplayMember, string ValueMember )
         
         /// <summary> Clear DataSource, DisplayMember, ValueMember in single line. </summary>

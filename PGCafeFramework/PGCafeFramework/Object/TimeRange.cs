@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +90,7 @@ namespace PGCafe.Object {
 
         /// <summary> Initial <see cref="TimeRange"/> struct by start time and zero of time span. </summary>
         /// <param name="Start"> Start time of range </param>
+        [JsonConstructor]
         public TimeRange( DateTime Start ) {
             this.Start = Start;  this.End = Start;
         } // public TimeRange( DateTime Start )
